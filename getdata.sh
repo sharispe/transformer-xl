@@ -4,6 +4,15 @@ echo "---"
 mkdir -p data
 cd data
 
+echo "- Downloading text8 (Character)"
+if [[ ! -d 'text8' ]]; then
+    mkdir -p text8
+    cd text8
+    wget --continue http://mattmahoney.net/dc/text8.zip
+    python ../../prep_text8.py
+    cd ..
+fi
+
 if [[ ! -d 'wikitext-2' ]]; then
     echo "- Downloading WikiText-2 (WT2)"
     wget --quiet --continue https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-v1.zip
@@ -36,14 +45,7 @@ if [[ ! -d 'enwik8' ]]; then
     cd ..
 fi
 
-echo "- Downloading text8 (Character)"
-if [[ ! -d 'text8' ]]; then
-    mkdir -p text8
-    cd text8
-    wget --continue http://mattmahoney.net/dc/text8.zip
-    python ../../prep_text8.py
-    cd ..
-fi
+
 
 echo "- Downloading Penn Treebank (PTB)"
 if [[ ! -d 'penn' ]]; then
